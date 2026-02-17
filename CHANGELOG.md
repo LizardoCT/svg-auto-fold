@@ -1,11 +1,17 @@
 # Changelog
 
+## [0.1.2] - 2025-02-17
+
+### Changed
+
+- Description updated: reflects native folding instead of Tailwind-style
+
 ## [0.1.1] - 2025-02-17
 
-### Cambiado
+### Changed
 
-- README actualizado a inglés y orientado a usuarios
-- Eliminadas instrucciones de publicación del README
+- README updated to English and user-focused
+- Removed publishing instructions from README
 
 ## [0.1.0] - 2025-02-17
 
