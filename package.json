@@ -1,0 +1,95 @@
+{
+  "name": "svg-auto-fold",
+  "displayName": "SVG Auto Fold",
+  "description": "Colapsa visualmente bloques SVG inline mostrando ••• como Tailwind Fold. Al abrir el archivo, todo SVG aparece colapsado.",
+  "version": "0.1.0",
+  "publisher": "lizardo-dev",
+  "icon": "images/icon.png",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LizardoCT/svg-auto-fold.git"
+  },
+  "homepage": "https://github.com/LizardoCT/svg-auto-fold#readme",
+  "bugs": {
+    "url": "https://github.com/LizardoCT/svg-auto-fold/issues"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Visualization", "Other"],
+  "activationEvents": ["onStartupFinished", "onLanguage:html", "onLanguage:php", "onLanguage:svg", "onLanguage:xml"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "svgFold.toggle",
+        "title": "SVG Fold: Alternar colapso"
+      },
+      {
+        "command": "svgFold.collapseAll",
+        "title": "SVG Fold: Colapsar todos los SVG"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "svgFold.toggle",
+        "key": "ctrl+alt+s",
+        "mac": "cmd+alt+s"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "SVG Auto Fold",
+      "properties": {
+        "svgFold.autoFold": {
+          "type": "boolean",
+          "default": true,
+          "description": "Colapsar SVG automáticamente al abrir archivos"
+        },
+        "svgFold.foldedText": {
+          "type": "string",
+          "default": "•••",
+          "description": "Texto mostrado cuando el bloque SVG está colapsado"
+        },
+        "svgFold.foldLengthThreshold": {
+          "type": "number",
+          "default": 20,
+          "description": "Mínimo de caracteres para colapsar (evita colapsar SVGs muy cortos)"
+        },
+        "svgFold.unfoldOnLineSelect": {
+          "type": "boolean",
+          "default": true,
+          "description": "Mostrar contenido completo al seleccionar la línea"
+        },
+        "svgFold.supportedLanguages": {
+          "type": "array",
+          "default": [
+            "html",
+            "php",
+            "blade",
+            "javascriptreact",
+            "typescriptreact",
+            "vue",
+            "svelte",
+            "svg",
+            "xml"
+          ],
+          "items": { "type": "string" },
+          "description": "Lenguajes donde aplicar el colapso"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^5.0.0"
+  }
+}
