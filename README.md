@@ -1,77 +1,68 @@
 # SVG Auto Fold
 
-Colapsa automáticamente el contenido de los bloques SVG al abrir archivos. Ideal para navegar código con muchos SVGs o íconos de cientos de líneas.
+Automatically collapses SVG blocks when opening files. Ideal for navigating code with many icons or SVGs spanning hundreds of lines.
 
-- **Al abrir:** todos los SVG aparecen colapsados (etiquetas `<svg>` y `</svg>` visibles, contenido oculto)
-- **Colapso real:** usa el plegado nativo de VSCode (las líneas se ocultan, no solo visualmente)
-- **Navegación:** expande con un clic en la flecha cuando necesites ver el contenido
+[![Install](https://img.shields.io/badge/Marketplace-Install-0078D4?logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=lizardo-dev.svg-auto-fold)
 
-## Uso
+## Installation
 
-1. Abre un archivo HTML, PHP, Blade, JSX, TSX, Vue, Svelte o SVG
-2. Los bloques SVG se colapsan automáticamente; verás `<svg...>` y `</svg>` con el contenido entre medias plegado
-3. Haz clic en la flecha para expandir el SVG que quieras editar
+### From the Marketplace (recommended)
 
-## Comandos
+1. Open **VSCode** or **Cursor**
+2. Go to **Extensions** (Ctrl+Shift+X)
+3. Search for **"SVG Auto Fold"** or **"lizardo-dev"**
+4. Click **Install**
 
-- **SVG Fold: Alternar colapso** (Ctrl+Alt+S) — Activa o desactiva el colapso automático al abrir
-- **SVG Fold: Colapsar todos los SVG** — Colapsa solo los SVG del archivo actual (sin afectar funciones, clases, etc.)
+Alternatively, press **Ctrl+P** and run:
 
-## Configuración
-
-| Clave | Default | Descripción |
-|-------|---------|-------------|
-| `svgFold.autoFold` | `true` | Colapsar automáticamente al abrir archivos |
-| `svgFold.foldLengthThreshold` | `20` | Mín. caracteres del contenido para colapsar |
-| `svgFold.supportedLanguages` | `["html","php","blade",...]` | Lenguajes donde aplicar |
-
-## Desarrollar
-
-```bash
-npm install
-npm run compile
-# F5 en VSCode para probar
+```
+ext install lizardo-dev.svg-auto-fold
 ```
 
-## Publicar en el Marketplace
+## What it does
 
-### 1. Requisitos previos
+- **When you open a file** with SVG (HTML, PHP, JSX, Vue, etc.), all `<svg>` blocks are automatically collapsed
+- **You'll see** the `<svg>` and `</svg>` tags with the content hidden in between
+- **To expand**, click the arrow next to the SVG you want to view
 
-- Cuenta en [Azure DevOps](https://dev.azure.com) (gratuita)
-- [Node.js](https://nodejs.org) instalado
+Before:
 
-### 2. Crear publicador
-
-1. Entra en [marketplace.visualstudio.com](https://marketplace.visualstudio.com)
-2. Inicia sesión con tu cuenta Microsoft
-3. Haz clic en tu avatar → **Create Publisher**
-4. Elige un ID (ej: `tu-usuario`) y complétalo
-
-### 3. Actualizar package.json
-
-El publisher `lizardo-dev` ya está configurado. Si tu repo de GitHub tiene otro nombre de usuario, edita `repository.url`, `homepage` y `bugs.url` en `package.json`.
-
-### 4. Instalar vsce y empaquetar
-
-```bash
-npm install -g @vscode/vsce
-npm run package
+```html
+<svg viewBox="0 0 24 24">
+  <path d="M12 2L2 7l10 5 10-5z"/>
+  <circle cx="12" cy="12" r="10"/>
+</svg>
 ```
 
-Esto genera `svg-auto-fold-0.1.0.vsix`.
+After (collapsed):
 
-### 5. Publicar
-
-```bash
-vsce publish
+```html
+<svg viewBox="0 0 24 24">
+  ... 2 lines ...
+</svg>
 ```
 
-La primera vez te pedirá un Personal Access Token de Azure DevOps con permisos **Packaging (Read & Write)**.
+## Commands
 
-### Instalación manual (.vsix)
+| Command | Shortcut | Description |
+|---------|----------|-------------|
+| SVG Fold: Toggle collapse | Ctrl+Alt+S | Enable or disable auto-collapse when opening files |
+| SVG Fold: Collapse all SVG | — | Collapse only SVG blocks in the current file |
 
-Para instalar el .vsix sin publicar:
+## Configuration
 
-1. `npm run package` para generar el .vsix
-2. En VSCode: Extensions → menú ⋯ → **Install from VSIX...**
-3. Selecciona `svg-auto-fold-0.1.0.vsix`
+Configure under **Settings** → **Extensions** → **SVG Auto Fold**:
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `svgFold.autoFold` | `true` | Auto-collapse when opening files |
+| `svgFold.foldLengthThreshold` | `20` | Minimum characters to collapse (skips very short SVGs) |
+| `svgFold.supportedLanguages` | `html, php, blade, jsx, vue...` | Languages where the extension applies |
+
+## Supported languages
+
+HTML, PHP, Blade, JavaScript React, TypeScript React, Vue, Svelte, SVG, and XML.
+
+## License
+
+MIT
