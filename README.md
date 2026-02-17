@@ -10,7 +10,7 @@ Automatically collapses SVG blocks when opening files. Ideal for navigating code
 
 1. Open **VSCode** or **Cursor**
 2. Go to **Extensions** (Ctrl+Shift+X)
-3. Search for **"SVG Auto Fold"** or **"lizardo-dev"**
+3. Search for **"SVG Auto Fold"**
 4. Click **Install**
 
 Alternatively, press **Ctrl+P** and run:
@@ -37,8 +37,7 @@ Before:
 After (collapsed):
 
 ```html
-<svg viewBox="0 0 24 24">
-  ... 2 lines ...
+<svg viewBox="0 0 24 24">...
 </svg>
 ```
 
