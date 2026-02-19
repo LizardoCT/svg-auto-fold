@@ -1,36 +1,59 @@
 # SVG Auto Fold
 
-Automatically collapses SVG blocks when opening files. Ideal for navigating code with many icons or SVGs spanning hundreds of lines.
+Automatically collapses inline `<svg>` blocks when opening files, making large files easier to read and navigate.
+Ideal for projects that use inline SVGs with long `<path>` definitions that can span dozens or hundreds of lines.
+The extension uses the editor’s **native folding system**, so SVG blocks are collapsed cleanly and can be expanded normally using standard fold controls — without modifying your code.
 
 [![Install](https://img.shields.io/badge/Marketplace-Install-0078D4?logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=lizardo-dev.svg-auto-fold)
 
 ## Installation
 
-### From the Marketplace (recommended)
+### From the Extensions Marketplace (Recommended)
 
-1. Open **VSCode** or **Cursor**
-2. Go to **Extensions** (Ctrl+Shift+X)
-3. Search for **"SVG Auto Fold"**
-4. Click **Install**
+1. Open your code editor (any VSCode-based editor).
+2. Go to **Extensions** (`Ctrl + Shift + X`).
+3. Search for **"SVG Auto Fold"**.
+4. Click **Install**.
 
-Alternatively, press **Ctrl+P** and run:
+---
+
+### Install via Command (VSCode CLI)
+
+If your editor supports the VSCode CLI, run:
+
+```
+code --install-extension lizardo-dev.svg-auto-fold
+```
+
+Or from Quick Open (`Ctrl + P`):
 
 ```
 ext install lizardo-dev.svg-auto-fold
 ```
 
+---
+
+### Manual Installation (.vsix)
+
+If the extension is not yet visible in your editor’s marketplace:
+
+1. Download the `.vsix` package.
+2. Open **Extensions**.
+3. Select **Install from VSIX…**
+4. Choose the downloaded file.
+
 ## What it does
 
-- **When you open a file** with SVG (HTML, PHP, JSX, Vue, etc.), all `<svg>` blocks are automatically collapsed
-- **You'll see** the `<svg>` and `</svg>` tags with the content hidden in between
-- **To expand**, click the arrow next to the SVG you want to view
+- **On file open**, inline `<svg>` blocks are automatically collapsed (HTML, PHP, JSX, Vue, etc.)
+- The `<svg>` and `</svg>` tags remain visible while the inner content is folded
+- You can expand any SVG using the editor’s standard fold controls
 
 Before:
 
 ```html
 <svg viewBox="0 0 24 24">
-  <path d="M12 2L2 7l10 5 10-5z"/>
-  <circle cx="12" cy="12" r="10"/>
+  <path d="M12 2L2 7l10 5 10-5z" />
+  <circle cx="12" cy="12" r="10" />
 </svg>
 ```
 
