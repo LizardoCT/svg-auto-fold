@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3] - 2025-02-17
+
+### Changed
+
+- README improved: clearer installation steps, manual .vsix option
+- Description synced with README for Marketplace display
+
 ## [0.1.2] - 2025-02-17
 
 ### Changed
