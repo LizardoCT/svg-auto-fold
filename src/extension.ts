@@ -1,8 +1,13 @@
 import * as vscode from "vscode";
-import { getSvgFoldingRanges, SvgFoldingProvider } from "./foldingProvider";
+import { detectSvgBlocks } from "./svgDetector";
 import * as Config from "./configuration";
 
-const LANGUAGES = ["html", "php", "blade", "javascriptreact", "typescriptreact", "vue", "svelte", "svg", "xml"];
+const LANGUAGES = [
+  "html", "php", "blade",
+  "javascriptreact", "typescriptreact",
+  "vue", "svelte", "svg", "xml",
+];
+
 const FOLDED_DOCS = new Set<string>();
 
 async function foldSvgsInEditor(editor: vscode.TextEditor) {
@@ -14,32 +19,29 @@ async function foldSvgsInEditor(editor: vscode.TextEditor) {
   if (FOLDED_DOCS.has(uri)) return;
   FOLDED_DOCS.add(uri);
 
-  const ranges = getSvgFoldingRanges(doc);
-  if (ranges.length === 0) return;
+  const blocks = detectSvgBlocks(doc);
+  if (blocks.length === 0) return;
 
-  // Pequeño retraso para que el editor haya calculado los rangos de plegado
-  await new Promise<void>((r) => setTimeout(r, 50));
+  await new Promise<void>((r) => setTimeout(r, 120));
 
-  const startLines = ranges.map((r) => r.start);
+  const lines = blocks.map((b) => b.startLine);
+
+  // Desplegar primero: el editor recuerda folds entre sesiones.
+  // Si el SVG ya está plegado, editor.fold plegaría el padre (div).
+  await vscode.commands.executeCommand("editor.unfold", {
+    selectionLines: lines,
+  });
+
   await vscode.commands.executeCommand("editor.fold", {
-    selectionLines: startLines,
+    selectionLines: lines,
   });
 }
 
-function onEditorActivated() {
-  const editor = vscode.window.activeTextEditor;
-  if (!editor) return;
-  foldSvgsInEditor(editor);
-}
-
 export function activate(context: vscode.ExtensionContext) {
-  const foldingProvider = new SvgFoldingProvider();
-  const foldingDisposable = vscode.languages.registerFoldingRangeProvider(
-    LANGUAGES.map((lang) => ({ language: lang })),
-    foldingProvider
-  );
+  // No registramos FoldingRangeProvider: hacerlo desactiva el plegado
+  // por indentación en lenguajes como PHP que dependen de él.
+  // En su lugar usamos editor.fold sobre los rangos nativos del editor.
 
-  // Plegar al abrir archivo o al cambiar de editor
   const onOpen = vscode.workspace.onDidOpenTextDocument((doc) => {
     if (!LANGUAGES.includes(doc.languageId)) return;
     const editor = vscode.window.visibleTextEditors.find(
@@ -50,14 +52,11 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
-  // No limpiar FOLDED_DOCS al cerrar: así no replegamos al reabrir.
-  // Si lo hiciéramos, editor.fold plegaría el padre (div) porque el SVG ya está plegado.
-
   const onActiveEditor = vscode.window.onDidChangeActiveTextEditor(() => {
-    onEditorActivated();
+    const editor = vscode.window.activeTextEditor;
+    if (editor) foldSvgsInEditor(editor);
   });
 
-  // Plegar al activar (p. ej. archivos ya abiertos al iniciar)
   if (vscode.window.activeTextEditor) {
     foldSvgsInEditor(vscode.window.activeTextEditor);
   }
@@ -78,21 +77,15 @@ export function activate(context: vscode.ExtensionContext) {
     async () => {
       const editor = vscode.window.activeTextEditor;
       if (!editor) return;
-      const ranges = getSvgFoldingRanges(editor.document);
-      if (ranges.length === 0) return;
+      const blocks = detectSvgBlocks(editor.document);
+      if (blocks.length === 0) return;
       await vscode.commands.executeCommand("editor.fold", {
-        selectionLines: ranges.map((r) => r.start),
+        selectionLines: blocks.map((b) => b.startLine),
       });
     }
   );
 
-  context.subscriptions.push(
-    foldingDisposable,
-    onOpen,
-    onActiveEditor,
-    toggleCommand,
-    collapseAllCommand
-  );
+  context.subscriptions.push(onOpen, onActiveEditor, toggleCommand, collapseAllCommand);
 }
 
 export function deactivate() {

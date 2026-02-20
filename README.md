@@ -2,7 +2,7 @@
 
 Automatically collapses inline `<svg>` blocks when opening files, making large files easier to read and navigate.
 Ideal for projects that use inline SVGs with long `<path>` definitions that can span dozens or hundreds of lines.
-The extension uses the editor’s **native folding system**, so SVG blocks are collapsed cleanly and can be expanded normally using standard fold controls — without modifying your code.
+The extension uses the editor's **native folding system**, so SVG blocks are collapsed cleanly and can be expanded normally using standard fold controls — without modifying your code.
 
 [![Install](https://img.shields.io/badge/Marketplace-Install-0078D4?logo=visualstudiocode)](https://marketplace.visualstudio.com/items?itemName=lizardo-dev.svg-auto-fold)
 
@@ -35,7 +35,7 @@ ext install lizardo-dev.svg-auto-fold
 
 ### Manual Installation (.vsix)
 
-If the extension is not yet visible in your editor’s marketplace:
+If the extension is not yet visible in your editor's marketplace:
 
 1. Download the `.vsix` package.
 2. Open **Extensions**.
@@ -44,9 +44,9 @@ If the extension is not yet visible in your editor’s marketplace:
 
 ## What it does
 
-- **On file open**, inline `<svg>` blocks are automatically collapsed (HTML, PHP, JSX, Vue, etc.)
+- **On file open**, inline `<svg>` blocks are automatically collapsed (HTML, PHP, Blade, JSX, Vue, etc.)
 - The `<svg>` and `</svg>` tags remain visible while the inner content is folded
-- You can expand any SVG using the editor’s standard fold controls
+- You can expand any SVG using the editor's standard fold controls
 
 Before:
 
