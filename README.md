@@ -52,34 +52,37 @@ Before:
 
 ```html
 <svg viewBox="0 0 24 24">
-  <path d="M12 2L2 7l10 5 10-5z" />
   <circle cx="12" cy="12" r="10" />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M14.207 1.707L13.5 1l-6 6-6-6-.707.707 6.353 6.354h.708l6.353-6.354zm0 6L13.5 7l-6 6-6-6-.707.707 6.353 6.354h.708l6.353-6.354z"
+  />
 </svg>
 ```
 
 After (collapsed):
 
 ```html
-<svg viewBox="0 0 24 24">...
-</svg>
+<svg viewBox="0 0 24 24">...</svg>
 ```
 
 ## Commands
 
-| Command | Shortcut | Description |
-|---------|----------|-------------|
-| SVG Fold: Toggle collapse | Ctrl+Alt+S | Enable or disable auto-collapse when opening files |
-| SVG Fold: Collapse all SVG | — | Collapse only SVG blocks in the current file |
+| Command                    | Shortcut         | Description                                        |
+| -------------------------- | ---------------- | -------------------------------------------------- |
+| SVG Fold: Toggle collapse  | Ctrl+Alt+S       | Enable or disable auto-collapse when opening files |
+| SVG Fold: Collapse all SVG | Ctrl+Alt+Shift+S | Collapse only SVG blocks in the current file       |
 
 ## Configuration
 
 Configure under **Settings** → **Extensions** → **SVG Auto Fold**:
 
-| Option | Default | Description |
-|--------|---------|-------------|
-| `svgFold.autoFold` | `true` | Auto-collapse when opening files |
-| `svgFold.foldLengthThreshold` | `20` | Minimum characters to collapse (skips very short SVGs) |
-| `svgFold.supportedLanguages` | `html, php, blade, jsx, vue...` | Languages where the extension applies |
+| Option                        | Default                         | Description                                            |
+| ----------------------------- | ------------------------------- | ------------------------------------------------------ |
+| `svgFold.autoFold`            | `true`                          | Auto-collapse when opening files                       |
+| `svgFold.foldLengthThreshold` | `20`                            | Minimum characters to collapse (skips very short SVGs) |
+| `svgFold.supportedLanguages`  | `html, php, blade, jsx, vue...` | Languages where the extension applies                  |
 
 ## Supported languages
 

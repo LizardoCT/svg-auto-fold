@@ -22,7 +22,7 @@ async function foldSvgsInEditor(editor: vscode.TextEditor) {
   const blocks = detectSvgBlocks(doc);
   if (blocks.length === 0) return;
 
-  await new Promise<void>((r) => setTimeout(r, 120));
+  await new Promise<void>((resolve) => setTimeout(resolve, 120));
 
   const lines = blocks.map((b) => b.startLine);
 
@@ -65,9 +65,10 @@ export function activate(context: vscode.ExtensionContext) {
     "svgFold.toggle",
     () => {
       const current = Config.get<boolean>("autoFold") ?? true;
-      Config.set("autoFold", !current);
+      const enabled = !current;
+      Config.set("autoFold", enabled);
       vscode.window.showInformationMessage(
-        `SVG Fold: ${!current ? "Colapsado" : "Expandido"}`
+        enabled ? "SVG Auto Fold: active" : "SVG Auto Fold: inactive"
       );
     }
   );

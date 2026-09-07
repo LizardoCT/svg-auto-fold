@@ -2,7 +2,7 @@
   "name": "svg-auto-fold",
   "displayName": "SVG Auto Fold",
   "description": "Automatically collapses inline SVG blocks when opening files. Uses the editor's native folding system — SVGs collapse cleanly and expand normally, without modifying your code. Ideal for files with many inline SVGs or long path definitions.",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "publisher": "lizardo-dev",
   "icon": "images/icon.png",
   "license": "MIT",
@@ -36,6 +36,11 @@
         "command": "svgFold.toggle",
         "key": "ctrl+alt+s",
         "mac": "cmd+alt+s"
+      },
+      {
+        "command": "svgFold.collapseAll",
+        "key": "ctrl+alt+shift+s",
+        "mac": "cmd+alt+shift+s"
       }
     ],
     "configuration": {

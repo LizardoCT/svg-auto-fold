@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6] - 2025-09-06
+
+### Changed
+
+- Toggle command now shows whether auto-collapse on file open is enabled or disabled, instead of "Colapsado"/"Expandido"
+- Added Ctrl+Alt+Shift+S shortcut for "SVG Fold: Collapse all SVG"
+
 ## [0.1.5] - 2025-02-19
 
 ### Fixed
